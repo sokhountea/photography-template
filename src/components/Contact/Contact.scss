@@ -1,0 +1,125 @@
+.Contact { 
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    margin: 0 7vw;
+
+    section {
+        margin: 0 0 30px 0;
+        font-size: 0.65em;
+
+        h1 {
+            font-weight: 400;
+            margin: 0.8em 0 0.1em 0;
+        }
+
+        span {
+            display:block;
+            height: 1px;
+            width: 100%;
+            background-color: black;
+            margin-bottom: 30px;
+        }
+
+        p {
+            margin: 0 auto;
+            line-height: 1.5;
+            width: 70%;
+        }
+    }
+
+    .porfolio-links {
+        margin: 20px auto;
+        width: 30% !important;
+    }
+
+    .Contact-main {
+        margin-top: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    } 
+
+    #Contact-form {
+        background-color:rgba($color: #ebeae9, $alpha: 0.5) ;
+        padding: 50px;
+
+        .form-group {
+            margin-bottom: 30px;
+        }
+        label, input, textarea {
+            font-family: 'Cormorant', serif;
+            font-size: 1.1em;
+            margin: 0 auto;
+            width: 80%;
+            display: block;
+        }
+
+        label {
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        input {
+            height: 25px;
+            border: none;
+            border-bottom: 1px solid black;
+        }
+
+        textarea:focus, input:focus {
+            
+        }
+
+        button {
+            all: unset;
+            cursor: pointer;
+            text-transform: uppercase;
+            border: 1px solid black;
+            padding: 5px 10px;
+
+            -webkit-transition: background-color 0.3s ease-in-out;
+                    transition: background-color 0.3s ease-in-out;
+
+            background-color: white;
+            &:hover {
+                background-color: rgba($color: black, $alpha: 0.15);
+            }
+        }
+    }
+
+    footer {
+        color: gray;
+
+        font-size: 0.65em;
+        text-align: left;
+        margin-top: 50px;
+        border-top: 1px solid black;
+        position: bottom;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        min-height: 150px;
+
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+
+        .social-info {
+            font-size: 1.4em;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            a {
+                -webkit-transition: color 0.1s;
+                    transition: color 0.1s;
+                flex: 1 1 10px;
+                display: flex;
+                justify-content: center;
+
+                &:hover {
+                    color:black;
+                }
+            } 
+        }
+    }
+}

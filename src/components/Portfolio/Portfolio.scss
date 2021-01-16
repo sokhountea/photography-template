@@ -1,0 +1,147 @@
+.Portfolio {
+    position: relative;
+    width: 100%;
+    max-width: 1500px;
+    min-height: 100vh;
+    margin: 0 7vw;
+    
+    nav {
+        margin: 50px 0;
+        font-size: 0.8em;
+        > div {
+            margin: 40px 0;
+            border-bottom: 1px solid black;
+            display: flex;
+            a {
+                margin:  0 30px 0 0;  
+                border-width:1px;    
+                border-top-style:solid;
+                border-top-color: white;
+                -webkit-transition: all 0.4s ease;                  
+                -moz-transition: all 0.4s ease;                 
+                -o-transition: all 0.4s ease;   
+                -ms-transition: all 0.4s ease;          
+                transition: all 0.4s ease;     
+                &:hover {
+                    border-top-color: black;
+                }
+            }
+        }
+    }
+
+
+    .gallery {
+        position: relative;
+        height: auto;
+        width: 85%;
+        margin: auto;
+        display: grid !important;
+        grid-template-columns: auto auto auto !important;
+        grid-auto-flow: row dense;
+
+        .image-wrapper {
+            position: relative;
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .item {
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+        }
+    }
+
+    footer {
+        font-size: 0.5em;
+        text-align: left;
+        margin-top: 50px;
+        border-top: 1px solid black;
+        position: bottom;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+
+        p {
+            margin: 0.5em 0;
+            font-size: 1.3em;
+            line-height: 1;
+        }
+
+        h1, h2 {
+            font-weight: 400;
+            margin: 0.5em 0;
+            padding:0;
+        }
+
+        h2, p {
+            color: gray;
+        }
+
+        .top, .bottom {
+            display: flex;
+            align-items: center;
+        }
+        
+        .top {
+            justify-content: space-between;
+
+            div {
+                &:nth-child(1) {
+                    padding: 10px 0 10px 2vw;
+                }
+                &:nth-child(2) {
+                    padding: 10px 2vw 10px 0;
+                }
+            }
+
+            .social-info {
+                a {
+                    color: gray;
+                    -webkit-transition: color 0.1s;
+                    transition: color 0.1s;
+                    i {
+                        margin-top: 10px;
+                        font-size: 1.5em;
+                        margin-right: 10px;
+                    }
+                    &:hover {
+                        color: black;
+                    }
+                }
+            }
+
+            .contact-link {
+                border: 1px solid black;
+                padding: 5px 0 !important;
+                a {
+                    padding: 0 !important;
+                }
+            }
+        }
+
+        .bottom {
+            justify-content: center;
+            a {
+                color: black;
+
+                &:hover {
+                    color: gray;
+                }
+            }
+        }
+    }
+}
+
+.scroll-up {
+    cursor: pointer;
+    position: fixed;
+    bottom: 5px;
+    right: calc(6vw / 2);
+    visibility: hidden;
+    opacity: 0;
+}.scroll-up.show {
+    visibility:visible;
+    opacity: 1;
+}
