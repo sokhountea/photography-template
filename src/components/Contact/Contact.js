@@ -23,17 +23,17 @@ class Contact extends Component {
 
         console.log(this.state);
 
-        axios({
-            method: "POST",
-            url: "/send",
-            data: this.state
-        })
-            .then(res => {
-                this.resetForm();
-            })
-            .catch(() => {
-                console.log('Message not sent')
-            })
+        // axios({
+        //     method: "POST",
+        //     url: "/send",
+        //     data: this.state
+        // })
+        //     .then(res => {
+        //         this.resetForm();
+        //     })
+        //     .catch(() => {
+        //         console.log('Message not sent')
+        //     })
     }
 
     resetForm() {
