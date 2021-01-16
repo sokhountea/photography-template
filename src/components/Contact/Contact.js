@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import { Link } from 'react-router-dom';
 import FadeIn from 'react-fade-in';
-import axios from 'axios';
+//import axios from 'axios';
 
 import './Contact.scss';
 
@@ -15,6 +15,11 @@ class Contact extends Component {
             message: '',
             sent: false,
         }
+    }
+
+    componentDidMount() {
+        document.body.style.overflow = 'auto';
+        window.scrollTo(0, 0);
     }
 
     handleSubmit(e) {

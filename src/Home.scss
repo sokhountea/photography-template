@@ -12,10 +12,6 @@
     /* scale bg image proportionately */
     background-size: cover;
   
-    /* making image black and white*/
-    // -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
-    // filter: grayscale(100%);
-  
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -35,10 +31,11 @@
             text-shadow: 1px 1px 5px rgba($color: black, $alpha: 0.5);
             margin: 0;
             font-size: 3.5em;
+            font-weight: 500;
             line-height: 0.9;
         }
         h2 {
-            font-size: 1.2em;
+            font-size: 1.1em;
         }
     }
 }

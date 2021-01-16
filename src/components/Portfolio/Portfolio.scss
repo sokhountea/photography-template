@@ -4,52 +4,146 @@
     max-width: 1500px;
     min-height: 100vh;
     margin: 0 7vw;
+
+    .overlay {
+        position: fixed;
+        top: 0;
+        right:0;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+        background-color: rgba($color: black, $alpha: 0.7);
+
+        visibility: hidden;
+        opacity: 0;
+        -webkit-transition: opacity 600ms, visibility 600ms;
+        transition: opacity 600ms, visibility 600ms;
+    } .overlay.open {
+        visibility: visible;
+        opacity: 1;
+    }
+
+    .nav.links, .collapsible {
+        a {
+            border-width:1px;    
+            border-top-style:solid;
+            border-top-color: white;
+            -webkit-transition: all 0.4s ease;                  
+            -moz-transition: all 0.4s ease;                 
+            -o-transition: all 0.4s ease;   
+            -ms-transition: all 0.4s ease;          
+            transition: all 0.4s ease;     
+            &:hover {
+                border-top-color: black;
+            }
+        }
+    }
     
-    nav {
+    .navigation {
+        position: relative;
         margin: 50px 0;
         font-size: 0.8em;
-        > div {
-            margin: 40px 0;
-            border-bottom: 1px solid black;
+        display: flex;
+        justify-content: space-between;
+        border-bottom: 1px solid black;
+
+        .nav.links {
             display: flex;
             a {
-                margin:  0 30px 0 0;  
-                border-width:1px;    
-                border-top-style:solid;
-                border-top-color: white;
-                -webkit-transition: all 0.4s ease;                  
-                -moz-transition: all 0.4s ease;                 
-                -o-transition: all 0.4s ease;   
-                -ms-transition: all 0.4s ease;          
-                transition: all 0.4s ease;     
-                &:hover {
-                    border-top-color: black;
+                margin: 0 30px 0 0;  
+            }
+        }
+        .box {
+            cursor: pointer;
+            display: none;
+            position: absolute;
+            top: -3px;
+            right: 3px;
+            z-index: 5;
+        }
+        .hamburger {
+            height: 100%;
+            span {
+                display:block !important;
+                background-color: black;
+                width: 20px;
+                height: 1px;
+                position:relative;
+                top: 0;
+                left:0;
+                margin: 3px 0;
+            }
+
+            &:hover {
+                span {
+                    background-color: gray;
+                }
+            }
+        }
+    }
+    .navigation.open {
+        .hamburger {
+            span {
+                &:nth-child(1) {
+                    transform:rotate(45deg);
+                    position:absolute;
+                    top: 0;
+                    left: 0;
+                }
+                &:nth-child(2) {
+                    display: none !important;
+                }
+                &:nth-child(3) {
+                    transform:rotate(135deg);
                 }
             }
         }
     }
 
+    .collapsible {
+        background-color: white;
+        border-left: 1px solid black;
+        display: flex;
+        justify-content: center start;
+        align-items: center;
+        position: fixed;
+        top: 0;
+        right: 0;
+  
+        font-size: 1.4em;
+        min-height: 100vh;
+        max-width: 0;
+        min-width: 0;
+        z-index: 3;
+  
+        transition: min-width 0.3s ease-in-out, box-shadow 0.5s;
+        -webkit-transition: min-width 0.3s ease-in-out, box-shadow 0.5s;
 
-    .gallery {
-        position: relative;
-        height: auto;
-        width: 85%;
-        margin: auto;
-        display: grid !important;
-        grid-template-columns: auto auto auto !important;
-        grid-auto-flow: row dense;
+        ul {
+            list-style: none;
+            min-width: 1000px;
+            li {
+                display: flex;
+                justify-content: center start;
+                align-items: center;
+                margin: 10vmin 0;
 
-        .image-wrapper {
-            position: relative;
-            height: 100%;
-            width: 100%;
-            overflow: hidden;
+                visibility: hidden;
+                opacity: 0;
+                transition: visibility 0s linear 300ms, opacity 100ms;
+                -webkit-transition: visibility 0s linear 300ms, opacity 100ms;
+            }
         }
+    }.collapsible.open {
+        min-width: 80%;
 
-        .item {
-            height: 100%;
-            width: 100%;
-            object-fit: cover;
+        ul {
+            li {
+                visibility: visible;
+                opacity: 1;
+                transition: visibility 0s linear 0s, opacity 500ms;
+                -webkit-transition: visibility 0s linear 0s, opacity 500ms;
+            }
         }
     }
 

@@ -29,7 +29,7 @@ h1, h2 {
 }
 
 .Porfolio-header, .Contact-header {
-  padding: 50px 0 0 7vw;
+  padding: 40px 0 0 7vw;
   font-size: 2em;
   display: flex;
   flex-wrap: wrap;
@@ -54,6 +54,30 @@ h1, h2 {
   }
 }
 
+.gallery {
+  position: relative;
+  height: auto;
+  width: 85%;
+  margin: auto;
+  display: grid !important;
+  grid-template-columns: auto auto auto;
+  grid-auto-flow: row dense;
+  grid-gap: 1vw;
+
+  .image-wrapper {
+      position: relative;
+      height: 100%;
+      width: 100%;
+      overflow: hidden;
+  }
+
+  .item {
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+  }
+}
+
 footer {
   min-height: 150px;
 
@@ -64,7 +88,7 @@ footer {
             color: gray;
         }
     }
-}
+  }
 }
 
 @media screen and (max-width: 1200px) {
@@ -84,17 +108,42 @@ footer {
   .App {
     font-size: $fz-lg;
   }
+  .gallery {
+    grid-template-columns: auto auto;
+  }
 } 
 
 @media screen and (max-width: 768px) {
   .App {
     font-size: $fz-md;
   }
+  .gallery {
+    width: 70%;
+    grid-template-columns: auto;
+  }
 } 
 
 @media screen and (max-width: 600px) {
   .App {
     font-size: $fz-sm;
+  }
+
+  .Porfolio-header, .Contact-header {
+    justify-content: center;
+    padding: 40px 0 0 0;
+  }
+
+  .Portfolio {
+    .nav.links {
+      display: block !important;
+      min-height: 18px;
+      a {
+        display: none !important;
+      }
+    }
+    .box {
+      display: block !important;
+    }
   }
 } 
 

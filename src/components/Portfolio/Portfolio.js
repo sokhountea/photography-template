@@ -18,21 +18,29 @@ var sceneryImages = [];
 class Portfolio extends Component {
     constructor(props) {
         super(props);
-        archiveImages = this.importAll(require.context('../../images/archive', false, /\.(png|jpe?g|svg)$/));
-        sceneryImages = this.importAll(require.context('../../images/sceneries', false, /\.(png|jpe?g|svg)$/));
-        allImages = [].concat(archiveImages, sceneryImages);
+        this.state = {
+            navOpen: false
+        };
         this.shuffleArray = this.shuffleArray.bind(this);
         this.scrollToNode = this.scrollToNode.bind(this);
+        this.handleClickOutside = this.handleClickOutside.bind(this);
+        archiveImages = this.importAll(require.context('../../images/archive', false, /\.(png|jpe?g|svg)$/));
+        sceneryImages = this.importAll(require.context('../../images/sceneries', false, /\.(png|jpe?g|svg)$/));
+        allImages = this.shuffleArray([].concat(archiveImages, sceneryImages));
     }
 
     componentDidMount() {
         window.addEventListener('scroll', this.listenToScroll);
         window.addEventListener('load', this.listenToScroll);
+        document.addEventListener('mousedown', this.handleClickOutside);
+        window.scrollTo(0, 0);
+        document.body.style.overflow = 'auto';
     }
 
     componentWillUnmount() {
         window.removeEventListener('scroll', this.listenToScroll);
         window.removeEventListener('load', this.listenToScroll);
+        document.removeEventListener('mousedown', this.handleClickOutside);
     }
 
     importAll(r) {
@@ -64,9 +72,34 @@ class Portfolio extends Component {
         }
     }
 
+    // Handles click outside of the collapsible menu
+    handleClickOutside(e) {
+        if (!this.state.navOpen || this.burger.contains(e.target)) {
+            return;
+        }
+        else if (!this.menu.contains(e.target) || this.link1.contains(e.target) || this.link2.contains(e.target) || this.link3.contains(e.target)) {
+            this.handleMenuClick();
+        }
+    }
+
+    // Handles when clicking on hamburger
+    handleMenuClick() {
+        if (!this.state.navOpen) {
+            document.getElementById('navigation').classList.add('open');
+            document.getElementById('collapsible').classList.add('open');
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.getElementById('navigation').classList = 'navigation';
+            document.getElementById('collapsible').classList = 'collapsible';
+            document.body.style.overflow = 'auto';
+        }
+        this.setState({ navOpen: !this.state.navOpen });
+    }
+
     render() {
         return (
             <div className="Portfolio">
+                {!this.state.navOpen ? <div className="overlay"></div> : <div className="overlay open"></div>}
                 <FadeIn delay={500}>
                     <span id="arrow-up" className="scroll-up" onClick={() => this.scrollToNode(this.header)}>
                         <i className="fas fa-sort-up"></i>
@@ -77,18 +110,35 @@ class Portfolio extends Component {
                         <Link to="/">Sokhountea Sy</Link>
                     </FadeIn>
                 </header>
-                <nav>
+                <nav className="navigation" id="navigation">
                     <FadeIn
                         delay={150}
-
+                        className="nav links"
                     >
                         <Link to="/portfolio">All</Link>
                         <Link to="/portfolio/archive">Tumblr Archive</Link>
                         <Link to="/portfolio/sceneries">Sceneries</Link>
                     </FadeIn>
+                    <FadeIn>
+                        <div className="box" ref={(node) => this.burger = node} onClick={() => this.handleMenuClick()}>
+                            <div className="hamburger" id="hamburger">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                        </div>
+                    </FadeIn>
                 </nav>
+                <div className="collapsible" id="collapsible" ref={(node) => this.menu = node}>
+                    <ul>
+                        <li><Link to="/portfolio" ref={(node) => this.link1 = node}>All</Link></li>
+                        <li><Link to="/portfolio/archive" ref={(node) => this.link2 = node} >Tumblr Archive</Link></li>
+                        <li><Link to="/portfolio/sceneries" ref={(node) => this.link3 = node} >Sceneries</Link></li>
+                        <li><Link to="/contact" className="link">Contact Me</Link></li>
+                    </ul>
+                </div>
                 <Route exact path="/portfolio">
-                    <Gallery array={this.shuffleArray(allImages)} />
+                    <Gallery array={allImages} />
                 </Route>
                 <Route path="/portfolio/archive">
                     <Gallery array={archiveImages} />
