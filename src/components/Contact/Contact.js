@@ -26,9 +26,7 @@ class Contact extends Component {
         // prevents the default action of the form, which would’ve caused a page reload.
         e.preventDefault();
 
-        console.log(this.state);
-
-        axios.post('https://sokhountea.github.io/photography-template/#/contact/send', this.state)
+        axios.post('/send', this.state)
             .then(response => {
                 this.setState({
                     response: response.data.message

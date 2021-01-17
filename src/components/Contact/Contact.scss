@@ -3,6 +3,7 @@
 .Contact { 
     position: relative;
     width: 100%;
+    max-width: 1500px;
     min-height: calc( 100vh - #{$footer-h});
     margin: 0 7vw;
     padding-bottom: $footer-h;
