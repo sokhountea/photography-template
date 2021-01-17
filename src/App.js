@@ -5,7 +5,7 @@ import './App.scss';
 import { Route } from 'react-router-dom';
 
 // Components
-import Home from './Home';
+import Home from './components/Home/Home';
 import Portfolio from './components/Portfolio/Portfolio'
 import Contact from './components/Contact/Contact'
 

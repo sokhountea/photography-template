@@ -1,9 +1,12 @@
+@import '../../variables';
+
 .Portfolio {
     position: relative;
     width: 100%;
     max-width: 1500px;
-    min-height: 100vh;
+    min-height: calc( 100vh - #{$footer-h});
     margin: 0 7vw;
+    padding-bottom: $footer-h;
 
     .overlay {
         position: fixed;
@@ -22,26 +25,11 @@
         visibility: visible;
         opacity: 1;
     }
-
-    .nav.links, .collapsible {
-        a {
-            border-width:1px;    
-            border-top-style:solid;
-            border-top-color: white;
-            -webkit-transition: all 0.4s ease;                  
-            -moz-transition: all 0.4s ease;                 
-            -o-transition: all 0.4s ease;   
-            -ms-transition: all 0.4s ease;          
-            transition: all 0.4s ease;     
-            &:hover {
-                border-top-color: black;
-            }
-        }
-    }
     
     .navigation {
+        text-align: left;
         position: relative;
-        margin: 50px 0;
+        margin-top: 50px;
         font-size: 0.8em;
         display: flex;
         justify-content: space-between;
@@ -149,13 +137,6 @@
 
     footer {
         font-size: 0.5em;
-        text-align: left;
-        margin-top: 50px;
-        border-top: 1px solid black;
-        position: bottom;
-        left: 0;
-        bottom: 0;
-        width: 100%;
 
         p {
             margin: 0.5em 0;

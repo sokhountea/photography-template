@@ -7,6 +7,7 @@ import './Portfolio.scss';
 // Libraries
 import { Link, Route } from 'react-router-dom';
 import { elementScrollIntoView } from "seamless-scroll-polyfill";
+import styled from 'styled-components'
 
 // Component
 import Gallery from './Gallery';
@@ -15,18 +16,44 @@ var allImages = [];
 var archiveImages = [];
 var sceneryImages = [];
 
+const Item = styled.span`
+    border-width:1px;    
+    border-top-style:solid;
+    border-top-color: ${props => props.active ? `black` : `white`};
+
+    &:hover {
+        border-top-color: black;
+    }
+
+    @media (max-width: 600px) {
+        display: ${props => props.active ? `inline` : `none`};
+        border-top-color: white;
+    }
+`
+
+const CollapsibleItem = styled.span`
+    border-width:1px;    
+    border-top-style:solid;
+    border-top-color: white;
+
+    &:hover {
+        border-top-color: black;
+    }
+`
+
 class Portfolio extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            navOpen: false
-        };
         this.shuffleArray = this.shuffleArray.bind(this);
         this.scrollToNode = this.scrollToNode.bind(this);
         this.handleClickOutside = this.handleClickOutside.bind(this);
         archiveImages = this.importAll(require.context('../../images/archive', false, /\.(png|jpe?g|svg)$/));
         sceneryImages = this.importAll(require.context('../../images/sceneries', false, /\.(png|jpe?g|svg)$/));
         allImages = this.shuffleArray([].concat(archiveImages, sceneryImages));
+        this.state = {
+            navOpen: false,
+            currentGallery: window.location.hash
+        };
     }
 
     componentDidMount() {
@@ -93,7 +120,19 @@ class Portfolio extends Component {
             document.getElementById('collapsible').classList = 'collapsible';
             document.body.style.overflow = 'auto';
         }
-        this.setState({ navOpen: !this.state.navOpen });
+        this.setState({
+            navOpen: !this.state.navOpen,
+            currentGallery: window.location.hash
+        });
+    }
+
+    // Handles when clicking on a navigation item
+    handleItemClick() {
+        setTimeout(() => {
+            this.setState({
+                currentGallery: window.location.hash
+            });
+        }, 200);
     }
 
     render() {
@@ -115,9 +154,15 @@ class Portfolio extends Component {
                         delay={150}
                         className="nav links"
                     >
-                        <Link to="/portfolio">All</Link>
-                        <Link to="/portfolio/archive">Tumblr Archive</Link>
-                        <Link to="/portfolio/sceneries">Sceneries</Link>
+                        <Link to="/portfolio" onClick={() => this.handleItemClick()} >
+                            <Item active={this.state.currentGallery === '#/portfolio'}>All</Item>
+                        </Link>
+                        <Link to="/portfolio/archive" onClick={() => this.handleItemClick()}>
+                            <Item active={this.state.currentGallery === '#/portfolio/archive'}>Tumblr Archive</Item>
+                        </Link>
+                        <Link to="/portfolio/sceneries" onClick={() => this.handleItemClick()}>
+                            <Item active={this.state.currentGallery === '#/portfolio/sceneries'}>Sceneries</Item>
+                        </Link>
                     </FadeIn>
                     <FadeIn>
                         <div className="box" ref={(node) => this.burger = node} onClick={() => this.handleMenuClick()}>
@@ -131,10 +176,22 @@ class Portfolio extends Component {
                 </nav>
                 <div className="collapsible" id="collapsible" ref={(node) => this.menu = node}>
                     <ul>
-                        <li><Link to="/portfolio" ref={(node) => this.link1 = node}>All</Link></li>
-                        <li><Link to="/portfolio/archive" ref={(node) => this.link2 = node} >Tumblr Archive</Link></li>
-                        <li><Link to="/portfolio/sceneries" ref={(node) => this.link3 = node} >Sceneries</Link></li>
-                        <li><Link to="/contact" className="link">Contact Me</Link></li>
+                        <li>
+                            <Link to="/portfolio" ref={(node) => this.link1 = node} onClick={() => this.handleItemClick()} >
+                                <CollapsibleItem>All</CollapsibleItem>
+                            </Link>
+                        </li>
+                        <li>
+                            <Link to="/portfolio/archive" ref={(node) => this.link2 = node} onClick={() => this.handleItemClick()}>
+                                <CollapsibleItem>Tumblr Archive</CollapsibleItem>
+                            </Link>
+                        </li>
+                        <li>
+                            <Link to="/portfolio/sceneries" ref={(node) => this.link3 = node} onClick={() => this.handleItemClick()}>
+                                <CollapsibleItem>Sceneries</CollapsibleItem>
+                            </Link>
+                        </li>
+                        <li><Link to="/contact" className="link"><CollapsibleItem>Contact Me</CollapsibleItem></Link></li>
                     </ul>
                 </div>
                 <Route exact path="/portfolio">

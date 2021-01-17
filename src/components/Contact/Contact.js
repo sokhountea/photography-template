@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import { Link } from 'react-router-dom';
 import FadeIn from 'react-fade-in';
-//import axios from 'axios';
+import axios from 'axios';
 
 import './Contact.scss';
 
@@ -13,7 +13,7 @@ class Contact extends Component {
             name: '',
             email: '',
             message: '',
-            sent: false,
+            response: ''
         }
     }
 
@@ -28,17 +28,18 @@ class Contact extends Component {
 
         console.log(this.state);
 
-        // axios({
-        //     method: "POST",
-        //     url: "/send",
-        //     data: this.state
-        // })
-        //     .then(res => {
-        //         this.resetForm();
-        //     })
-        //     .catch(() => {
-        //         console.log('Message not sent')
-        //     })
+        axios.post('/send', this.state)
+            .then(response => {
+                this.setState({
+                    response: response.data.message
+                })
+                this.resetForm();
+            })
+            .catch(() => {
+                this.setState({
+                    response: 'Something went wrong. Please try again later'
+                })
+            });
     }
 
     resetForm() {
@@ -86,7 +87,7 @@ class Contact extends Component {
                                             type="text"
                                             className="form-control"
                                             value={this.state.name}
-
+                                            required
                                         />
                                     </div>
                                     <div className="form-group">
@@ -96,7 +97,7 @@ class Contact extends Component {
                                             type="email"
                                             className="form-control"
                                             value={this.state.email}
-
+                                            required
                                         />
                                     </div>
                                     <div className="form-group">
@@ -106,11 +107,14 @@ class Contact extends Component {
                                             className="form-control"
                                             rows="5"
                                             value={this.state.message}
-
+                                            required
                                         >
                                         </textarea>
                                     </div>
                                     <button type="submit" className="btn btn-primary">Send</button>
+                                    <div className="form-response">
+                                        <span>{this.state.response}</span>
+                                    </div>
                                 </form>
                             </section>
                         </FadeIn>
