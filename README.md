@@ -1,5 +1,5 @@
 # Photography Portfolio Template
-Designed and developed a responsive photography portfolio website. Design is kept minimalist to let the photographs stand out. Implemented a simple backend that allows sending emails through the contact form. The contact form does not work on Github as Github Pages is only for static websites.
+Designed and developed a responsive photography portfolio website. Design is kept minimalist to let the photographs stand out. Implemented a simple backend that allows sending emails through a contact form. The contact form does not work on Github as Github Pages is only for static websites.
 
 ### To see it live
 https://sokhountea.github.io/photography-template/
