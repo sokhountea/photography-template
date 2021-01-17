@@ -28,7 +28,7 @@ class Contact extends Component {
 
         console.log(this.state);
 
-        axios.post('/send', this.state)
+        axios.post('https://sokhountea.github.io/photography-template/#/contact/send', this.state)
             .then(response => {
                 this.setState({
                     response: response.data.message
