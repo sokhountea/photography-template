@@ -1,6 +1,9 @@
 # Photography Portfolio Template
 Designed and developed a responsive photography portfolio website. Design is kept minimalist to let the photographs shine the most. Implemented a simple backend that allows sending emails through the contact form.
 
+### To see it live
+https://sokhountea.github.io/photography-template/#/
+
 ### Instructions
 If no port is specified in `.env` file, the server will run at https://localhost:3030/
 
