@@ -22,6 +22,7 @@ class Contact extends Component {
         window.scrollTo(0, 0);
     }
 
+    // Handles when clicking on Send button form
     handleSubmit(e) {
         // prevents the default action of the form, which would’ve caused a page reload.
         e.preventDefault();
@@ -40,6 +41,7 @@ class Contact extends Component {
             });
     }
 
+    // Resets the form
     resetForm() {
         this.setState({
             name: '',
