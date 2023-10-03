@@ -1,0 +1,25 @@
+.imageModal__container {
+    background-color: white;
+    padding: 10px;
+    display: flex;
+    flex-flow: column;
+    outline: 0 !important;
+}
+
+.imageModal__body {
+    margin: 0 30px 30px 30px;
+}
+
+.closeButton__container {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+
+    .closeButton {
+        cursor: pointer;
+    }
+
+    .closeButton:hover {
+        color: #666666;
+    }
+}

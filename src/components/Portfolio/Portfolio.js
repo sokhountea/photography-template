@@ -11,6 +11,7 @@ import styled from 'styled-components'
 
 // Component
 import Gallery from './Gallery';
+import ImageModal from './ImageModal';
 
 var allImages = [];
 var archiveImages = [];
@@ -46,11 +47,21 @@ class Portfolio extends Component {
         super(props);
         this.shuffleArray = this.shuffleArray.bind(this);
         this.scrollToNode = this.scrollToNode.bind(this);
+        this.handleImageClick = this.handleImageClick.bind(this);
         this.handleClickOutside = this.handleClickOutside.bind(this);
+        this.handleImageModalClose = this.handleImageModalClose.bind(this);
         archiveImages = this.importAll(require.context('../../images/archive', false, /\.(png|jpe?g|svg)$/));
         sceneryImages = this.importAll(require.context('../../images/sceneries', false, /\.(png|jpe?g|svg)$/));
         allImages = this.shuffleArray([].concat(archiveImages, sceneryImages));
         this.state = {
+            showImageModal: false,
+            selectedImage: {
+                src: null,
+                dims: {
+                    width: 0,
+                    height: 0
+                }
+            },
             navOpen: false,
             currentGallery: window.location.hash
         };
@@ -135,10 +146,65 @@ class Portfolio extends Component {
         }, 200);
     }
 
+    handleImageClick = async (image) => {
+        if (image?.default) {
+            // Get image dimensions
+            await this.getImageWidthHeight(image)
+                .then((res) => {
+                    this.setState({
+                        showImageModal: true,
+                        selectedImage: {
+                            src: image.default,
+                            dims: {
+                                width: res.width,
+                                height: res.height
+                            }
+                        }
+                    });
+
+                    setTimeout(() => {
+                        // document.body.style.paddingRight = '0px';
+                    }, 50);
+                })
+                .catch(() => console.error("Image doesn't exist."));
+        }
+    }
+
+    handleImageModalClose() {
+        this.setState({
+            showImageModal: false
+        });
+    }
+
+    // Function to get image dimensions
+    getImageWidthHeight(image) {
+        return new Promise((resolve, reject) => {
+            const img = new Image();
+            img.src = image.default;
+
+            img.onload = function () {
+                document.body.appendChild(this);
+                const width = this.width;
+                const height = this.height;
+                document.body.removeChild(this);
+                resolve({
+                    width: width,
+                    height: height
+                })
+            };
+            img.onerror = reject;
+        })
+    }
+
     render() {
         return (
             <div className="Portfolio">
                 {!this.state.navOpen ? <div className="overlay"></div> : <div className="overlay open"></div>}
+                <ImageModal
+                    show={this.state.showImageModal}
+                    selectedImage={this.state.selectedImage}
+                    handleImageModalClose={this.handleImageModalClose}
+                />
                 <FadeIn delay={500}>
                     <span id="arrow-up" className="scroll-up" onClick={() => this.scrollToNode(this.header)}>
                         <i className="fas fa-sort-up"></i>
@@ -195,13 +261,13 @@ class Portfolio extends Component {
                     </ul>
                 </div>
                 <Route exact path="/portfolio">
-                    <Gallery array={allImages} />
+                    <Gallery array={allImages} onImageClick={this.handleImageClick} />
                 </Route>
                 <Route path="/portfolio/archive">
-                    <Gallery array={archiveImages} />
+                    <Gallery array={archiveImages} onImageClick={this.handleImageClick} />
                 </Route>
                 <Route path="/portfolio/sceneries">
-                    <Gallery array={sceneryImages} />
+                    <Gallery array={sceneryImages} onImageClick={this.handleImageClick} />
                 </Route>
                 <footer>
                     <FadeIn>

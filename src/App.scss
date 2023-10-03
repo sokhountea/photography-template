@@ -1,12 +1,16 @@
 @import 'variables';
 
+body {
+  overflow: auto !important;
+  padding-right: 0 !important;
+}
+
 * {
   -webkit-transition: all 0.3s ease, font-size 0s ease;
-     -moz-transition: all 0.3s ease, font-size 0s ease;
-      -ms-transition: all 0.3s ease, font-size 0s ease;
-       -o-transition: all 0.3s ease, font-size 0s ease;
-          transition: all 0.3s ease, font-size 0s ease;
-  //border: 1px solid blue !important;
+  -moz-transition: all 0.3s ease, font-size 0s ease;
+  -ms-transition: all 0.3s ease, font-size 0s ease;
+  -o-transition: all 0.3s ease, font-size 0s ease;
+  transition: all 0.3s ease, font-size 0s ease;
 }
 
 .App {
@@ -21,12 +25,14 @@ a {
   text-decoration: none;
 }
 
-h1, h2 {
+h1,
+h2 {
   margin: 0.5em 0;
   padding: 0;
 }
 
-.Porfolio-header, .Contact-header {
+.Porfolio-header,
+.Contact-header {
   padding: 40px 0 0 7vw;
   font-size: 2em;
   display: flex;
@@ -37,6 +43,7 @@ h1, h2 {
 
 [class*='-links'] {
   width: 100%;
+
   .link {
     cursor: pointer;
     border: 1px solid black;
@@ -47,6 +54,7 @@ h1, h2 {
     text-align: center;
     text-transform: uppercase;
   }
+
   &:hover {
     background-color: rgba($color: black, $alpha: 0.1);
   }
@@ -63,16 +71,17 @@ h1, h2 {
   grid-gap: 1vw;
 
   .image-wrapper {
-      position: relative;
-      height: 100%;
-      width: 100%;
-      overflow: hidden;
+    position: relative;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    cursor: pointer;
   }
 
   .item {
-      height: 100%;
-      width: 100%;
-      object-fit: cover;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
   }
 }
 
@@ -81,17 +90,18 @@ footer {
   width: 100%;
   position: absolute;
   bottom: 0;
-  right:0;
+  right: 0;
   text-align: left;
   margin-top: 50px;
   min-height: $footer-h;
 
   .bottom {
     a {
-        color: black;
-        &:hover {
-            color: gray;
-        }
+      color: black;
+
+      &:hover {
+        color: gray;
+      }
     }
   }
 }
@@ -101,39 +111,42 @@ footer {
     font-size: $fz-xxl;
   }
 
-} 
+}
 
 @media screen and (max-width: 1024px) {
   .App {
     font-size: $fz-xl;
   }
-} 
+}
 
 @media screen and (max-width: 900px) {
   .App {
     font-size: $fz-lg;
   }
+
   .gallery {
     grid-template-columns: auto auto;
   }
-} 
+}
 
 @media screen and (max-width: 768px) {
   .App {
     font-size: $fz-md;
   }
+
   .gallery {
     width: 70%;
     grid-template-columns: auto;
   }
-} 
+}
 
 @media screen and (max-width: 600px) {
   .App {
     font-size: $fz-sm;
   }
 
-  .Porfolio-header, .Contact-header {
+  .Porfolio-header,
+  .Contact-header {
     justify-content: center;
     padding: 40px 0 0 0;
   }
@@ -144,18 +157,19 @@ footer {
         margin: 0 !important;
       }
     }
+
     .box {
       display: block !important;
     }
   }
-} 
+}
 
 @media screen and (max-width: 480px) {
   .App {
     font-size: $fz-xs;
   }
 
-} 
+}
 
 @media screen and (max-width: 300px) {
   .App {
